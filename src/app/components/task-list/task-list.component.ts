@@ -9,7 +9,8 @@ import { Task } from 'src/app/models/task';
 })
 export class TaskListComponent implements OnInit {
   @Output() taskCompleted = new EventEmitter<Task>();
-  newTaskName: string = ''; // Asegúrate de declarar la propiedad newTaskName
+  newTaskName: string = '';
+  newTaskInputValue: string = '';
   tasks: Task[] = [];
 
   constructor(private taskService: TaskService) {}
@@ -25,23 +26,24 @@ export class TaskListComponent implements OnInit {
   }
 
   addTask(taskName: string) {
-    const nombreTarea = 'Nombre de la tarea';
+    const nameTask = 'Nombre de la tarea: ' + taskName;
     const additionalValue = 'Valor adicional de la tarea';
-    this.taskService.addTask(nombreTarea, additionalValue).subscribe(() => {
-      // Lógica adicional después de agregar la tarea
+    this.taskService.addTask(nameTask, additionalValue).subscribe(() => {
+      this.newTaskInputValue = nameTask;
+      this.newTaskName = '';
     });
   }
 
   deleteTask(taskId: number): void {
     this.taskService.deleteTask(taskId).subscribe(() => {
-      this.getTasks(); // Actualiza la lista de tareas después de eliminar una tarea
+      this.getTasks();
     });
   }
-markTaskAsCompleted(taskId: number): void {
-  const additionalValue = 'Valor adicional de la tarea';
-  this.taskService.markTaskAsCompleted(taskId, additionalValue).subscribe(() => {
-    // Lógica adicional después de marcar la tarea como completada
-  });
-}
 
+  markTaskAsCompleted(taskId: number): void {
+    const additionalValue = 'Valor adicional de la tarea';
+    this.taskService.markTaskAsCompleted(taskId, additionalValue).subscribe(() => {
+      // Lógica adicional después de marcar la tarea como completada
+    });
+  }
 }

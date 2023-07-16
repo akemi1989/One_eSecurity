@@ -13,25 +13,20 @@ export class CompletedTaskListComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
-    this.taskService.getCompletedTasks().subscribe(tasks => {
-      console.log("Tareas completadas:", tasks);
-      this.completedTasks = tasks;
-    });
+    this.getCompletedTasks();
   }
 
   getCompletedTasks(): void {
     this.taskService.getCompletedTasks().subscribe(tasks => {
-      console.log("encimatask", tasks)
-      console.log("ei", this.completedTasks)
       this.completedTasks = tasks;
-      console.log("ddebajo", this.completedTasks)
-      console.log("ddebajo task", tasks)
     });
   }
 
   deleteTask(taskId: number): void {
-    this.taskService.deleteTask(taskId).subscribe(() => {
-      this.getCompletedTasks();
+    this.taskService.deleteCompletedTask(taskId).subscribe(() => {
+      this.taskService.deleteTask(taskId).subscribe(() => {
+        this.getCompletedTasks();
+      });
     });
   }
 }

@@ -25,16 +25,11 @@ export class FakeApiService {
   }
 
   deleteTask(taskId: number): Observable<void> {
-    const taskIndex = this.tasks.findIndex(task => task.id === taskId);
-    if (taskIndex !== -1) {
-      this.tasks.splice(taskIndex, 1);
-    }
-
     const completedTaskIndex = this.completedTasks.findIndex(task => task.id === taskId);
     if (completedTaskIndex !== -1) {
       this.completedTasks.splice(completedTaskIndex, 1);
     }
-
+  
     return of();
   }
 

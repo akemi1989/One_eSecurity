@@ -126,6 +126,14 @@ export class TaskService {
     }
     return of();
   }
+  
+  deleteCompletedTask(taskId: number): Observable<void> {
+    const completedTaskIndex = this.completedTasks.findIndex(task => task.id === taskId);
+    if (completedTaskIndex !== -1) {
+      this.completedTasks.splice(completedTaskIndex, 1);
+    }
+    return of();
+  }
 
   private generateTaskId(): number {
     return Math.floor(Math.random() * 1000);

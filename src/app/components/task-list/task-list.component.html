@@ -2,7 +2,7 @@
 
 <!-- Agregar tarea -->
 <div>
-  <input type="text" [(ngModel)]="newTaskName" placeholder="Nueva tarea">
+  <input type="text" [(ngModel)]="newTaskName" [placeholder]="newTaskInputValue ? 'Nueva tarea: ' + newTaskInputValue : 'Nueva tarea'" #newTaskInput>
   <button (click)="addTask(newTaskName)">Agregar</button>
 </div>
 
