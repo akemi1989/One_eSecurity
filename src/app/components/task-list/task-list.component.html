@@ -1,0 +1,20 @@
+<h2>Lista de tareas pendientes</h2>
+
+<!-- Agregar tarea -->
+<div>
+  <input type="text" [(ngModel)]="newTaskName" placeholder="Nueva tarea">
+  <button (click)="addTask(newTaskName)">Agregar</button>
+</div>
+
+<!-- Mostrar tareas -->
+<ul>
+  <li *ngFor="let task of tasks">
+    <span>{{ task.name }}</span>
+    <button (click)="deleteTask(task.id)">Eliminar</button>
+    <button (click)="markTaskAsCompleted(task.id)">Completado</button>
+  </li>
+</ul>
+
+
+<!-- Mostrar tareas completadas -->
+<app-completed-task-list></app-completed-task-list>

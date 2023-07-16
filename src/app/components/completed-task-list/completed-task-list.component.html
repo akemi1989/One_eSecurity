@@ -1,0 +1,8 @@
+<h2>Lista de tareas completadas</h2>
+<!-- Mostrar tareas completadas -->
+<ul>
+  <li *ngFor="let completedTask of completedTasks">
+    <span>{{ completedTask.name }}</span>
+    <button (click)="deleteTask(completedTask.id)">Eliminar</button>
+  </li>
+</ul>
